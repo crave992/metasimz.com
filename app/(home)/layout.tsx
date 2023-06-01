@@ -20,16 +20,19 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <div className="block relative w-full h-full overflow-hidden bg-gradient-to-br from-gray-950 from-30% via-purple-500 via-50% to-pink-500 to-90%">
-      <Header></Header>
-      <img 
-        src={mei} 
-        alt="mei"
-        className="absolute bottom-0 top-24"/>
-      <div className="fixed flex top-0 right-0 bottom-0 max-w-md w-full bg-gradient-to-r from-cyan-500 to-blue-500">
-        {children}
-      </div>
-      </div>
+        <div className="flex relative items-stretch w-full h-full overflow-hidden bg-gradient-to-br from-gray-950 from-30% via-purple-500 via-50% to-pink-500 to-90%">
+          <div className="w-full z-0">
+            <Header></Header>
+            <img
+              src={mei}
+              alt="mei"
+              className="max-w-md w-full absolute bottom-0 left-0" />
+          </div>
+        
+          <div className="flex justify-self-end h-screen max-w-md w-full bg-gradient-to-r from-cyan-500 to-blue-500 z-50">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   )
