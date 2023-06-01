@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import LogoutButton from '@/components/buttons/Logout'
-import { UserService } from '@/lib/services/User.service';
-import { User } from '@/models/User.model';
+import { UserService } from '@/lib/services/user.service';
+import { User } from '@/lib/models/User.model';
 import { getAuth } from '@firebase/auth';
 import { firestoreDB } from '@/config/firebaseConfig';
 

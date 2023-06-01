@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Firestore, doc, getDoc, setDoc } from 'firebase/firestore';
-import { User } from '../../models/User.model';
+import { User } from '../models/User.model';
 import { getStorage, ref, uploadBytes, getDownloadURL, StorageReference } from 'firebase/storage';
 
 export class UserService {

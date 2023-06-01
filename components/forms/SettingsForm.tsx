@@ -1,8 +1,8 @@
 "use client"
 
 import { SetStateAction, useEffect, useState } from 'react';
-import { User } from '@/models/User.model';
-import { UserService } from '../../lib/services/User.service';
+import { User } from '@/lib/models/User.model';
+import { UserService } from '../../lib/services/user.service';
 import { auth, firestoreDB } from '@/config/firebaseConfig';
 
 export default function SettingsForm() {
