@@ -4,41 +4,42 @@ import { useState, useEffect } from 'react';
 import Link from "next/link"
 import { firestore, firestoreDB } from '@/config/firebaseConfig';
 import DepositTable from "@/components/tables/DepositTable"
-import DepositService from '@/lib/services/deposit.service'
 import { Deposit } from '@/lib/models/deposit.model';
 
 const Deposit: React.FC = () => {
   const [deposits, setDeposits] = useState<Deposit[] | undefined>(undefined);
 
-  useEffect(() => {
-    const depositService = new DepositService(firestoreDB);
+  const handleDeleteDeposits = async (ids: string[]) => {
+    if (!deposits) return; // Handle the case where `deposits` is undefined
 
-    const getAllDeposits = async () => {
+    const updatedDeposits = deposits.filter((deposit) => !ids.includes(deposit.id));
+    setDeposits(updatedDeposits);
+
+    // Delete the deposits from Firestore using the provided IDs
+    for (const id of ids) {
       try {
-        const retrievedDeposits = await depositService.getAllDeposits().toPromise();
-        setDeposits(retrievedDeposits);
+        await firestore.collection('deposits').doc(id).delete();
       } catch (error) {
-        console.error('Error retrieving deposits:', error);
+        console.error('Error deleting deposit:', error);
       }
+    }
+  };
+
+  useEffect(() => {
+    // Fetch the deposits from Firestore and update the state
+    const fetchDeposits = async () => {
+      const querySnapshot = await firestore.collection('deposits').get();
+
+      const loadedDeposits: Deposit[] = [];
+      querySnapshot.forEach((doc) => {
+        loadedDeposits.push({ id: doc.id, ...doc.data() } as Deposit);
+      });
+
+      setDeposits(loadedDeposits);
     };
 
-    getAllDeposits();
+    fetchDeposits();
   }, []);
-
-  const handleDeleteDeposits = (ids: string[]) => {
-    const depositService = new DepositService(firestoreDB);
-
-    depositService.deleteDeposits(ids).subscribe(
-      () => {
-        setDeposits((prevDeposits) =>
-          prevDeposits!.filter((deposit) => !ids.includes(deposit.id))
-        );
-      },
-      (error) => {
-        console.error('Error deleting deposits:', error);
-      }
-    );
-  };
 
   return (
     <section id="tableDeposit">
