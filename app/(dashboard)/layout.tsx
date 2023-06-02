@@ -1,8 +1,6 @@
-"use client"
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '../../config/firebaseConfig';
-import { Inter } from 'next/font/google'
 import '../../public/styles/globals.scss'
 import Header from '@/layout/dashboard/Header';
 import Footer from '@/layout/dashboard/Footer';

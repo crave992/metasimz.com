@@ -1,10 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import '../../public/styles/globals.scss'
 import Header from '@/layout/template/Header'
-import { Inter } from 'next/font/google'
 import { storage } from '@/config/firebaseConfig'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -19,7 +16,7 @@ export default async function RootLayout({
   const mei = await storage.ref('images/mei.png').getDownloadURL();
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="main">
         <div className="flex relative items-stretch w-full h-full overflow-hidden bg-gradient-to-br from-gray-950 from-30% via-purple-500 via-50% to-pink-500 to-90%">
           <div className="w-full z-0">
             <Header></Header>

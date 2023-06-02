@@ -6,6 +6,7 @@ import { UserService } from '@/lib/services/user.service';
 import { User } from '@/lib/models/User.model';
 import { getAuth } from '@firebase/auth';
 import { firestoreDB } from '@/config/firebaseConfig';
+import Clock from "@/components/misc/Clock";
 
 export default function Header() {
   const [user, setUser] = useState<User>();
@@ -25,11 +26,13 @@ export default function Header() {
   }, []);
   return (
     <header>
-      <div className="header flex justify-end">
-        <div>
+      <div className="header justify-end">
+        <div className="flex">
           {user ? (
-            <div>
-              <h1>{user.firstName}</h1>
+            <div className="flex items-center">
+              <Clock />
+              <img src={user.profilePicture} alt="profile picture" width='40' className="mx-3" />
+              <p className="mx-3">{user.firstName} {user.lastName}</p>
             </div>
           ) : (
             <p>Loading...</p>
