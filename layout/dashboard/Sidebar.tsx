@@ -24,10 +24,10 @@ const Sidebar = () => {
               Dashboard
             </Link>
           </li>
-          <li className={isActive('/dashboard/manage-users') ? 'active' : ''}>
+          <li className={isActive('/dashboard/deposit') ? 'active' : ''}>
             <Link 
-              href="/dashboard/manage-users">
-              Manage Users
+              href="/dashboard/deposit">
+              Deposit
             </Link>
           </li>
           <li className={isActive('/dashboard/register') ? 'active' : ''}>
